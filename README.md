@@ -1,24 +1,23 @@
 # actions-test
 
-## Project setup
-```
-npm install
-```
+### event
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- on: push ...
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### workflow
 
-### Lints and fixes files
-```
-npm run lint
-```
+- 이벤트 발생했을 떄
+- 요리책과 같음
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### job
+
+- 돌립적인 runner 컨테이너에서 실행
+- step
+
+### actions
+
+- 재사용할 수 있는 공개된 것들 사용할 수 있음
+- action check out
+- action setup node
+
+### runners
