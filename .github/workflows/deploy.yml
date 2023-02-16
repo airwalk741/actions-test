@@ -33,4 +33,5 @@ jobs:
         with:
           source: "dist/*"
           strip_components: 1
-          target: "/home/ubuntu/test"
+          target: "/var/www/test"
+          overwrite: true
