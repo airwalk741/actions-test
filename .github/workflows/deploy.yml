@@ -16,21 +16,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          uses: actions/setup-node@v3
+          with:
+            node-version: ${{ matrix.node-version }}
+            cache: "npm"
       - name: Install modules
-        run: npm install
+          run: npm install
       - name: Build project
-        run: npm run build
+          run: npm run build
       - name: Deploy build outputs
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.PORT }}
-          source: "build/*"
-          strip_components: 1
-          target: "/var/www/test"
+          uses: appleboy/scp-action@master
+          env:
+            HOST:  ${{ secrets.HOST }}
+            USERNAME: ${{ secrets.USERNAME }}
+            KEY: ${{ secrets.SSH_KEY }}
+          with:
+            source: "build/*"
+            strip_components: 1
+            target: "/var/www/test"
