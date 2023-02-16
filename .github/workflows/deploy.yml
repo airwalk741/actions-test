@@ -5,7 +5,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    environment: Oracle
     env:
       CI: false
     strategy:
@@ -26,12 +26,11 @@ jobs:
         run: npm run build
       - name: Deploy build outputs
         uses: appleboy/scp-action@master
-        env:
-          HOST: ${{ secrets.Oracle.HOST }}
-          USERNAME: ${{ secrets.Oracle.USERNAME }}
-          KEY: ${{ secrets.Oracle.SSH_KEY }}
-          PORT: ${{ secrets.Oracle.PORT }}
         with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PORT }}
           source: "build/*"
           strip_components: 1
           target: "/var/www/test"
