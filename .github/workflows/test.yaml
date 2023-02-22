@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: Oracle
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      # - name: Checkout
+      #   uses: actions/checkout@v2
 
       - name: ssh connect & production
         uses: appleboy/ssh-action@master
