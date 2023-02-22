@@ -22,7 +22,4 @@ jobs:
           port: 22
           script_stop: true
           script: |
-            whoami
-            ls -al
-            cd ~
-            mkdir test
+            mkdir ~/test
