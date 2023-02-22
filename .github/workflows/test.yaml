@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    name: Build
+  mkdir:
+    name: mkdir test
     runs-on: ubuntu-latest
     environment: Oracle
 
@@ -23,3 +23,62 @@ jobs:
           script: |
             cd ~
             mkdir test
+            mkdir test/client
+
+  build:
+    runs-on: ubuntu-latest
+    environment: Oracle
+    env:
+      CI: false
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: Install modules
+        run: npm install
+      - name: Build project
+        run: npm run build
+      - name: Deploy build outputs
+        uses: appleboy/scp-action@master
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          KEY: ${{ secrets.SSH_KEY }}
+        with:
+          source: "dist/*"
+          target: "~/test/build"
+          strip_components: 1
+
+      - name: docker file scp
+        uses: appleboy/scp-action@master
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          KEY: ${{ secrets.SSH_KEY }}
+        with:
+          source: ["./client", "./docker-compose.yaml"]
+          target: "~/test"
+          strip_components: 1
+
+  docker:
+    name: docker start
+    runs-on: ubuntu-latest
+    environment: Oracle
+
+    steps:
+      - name: multiple command
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            cd ~/test
+            docker-compose up -d
