@@ -10,7 +10,6 @@ services:
       - "18081:18081"
     volumes:
       - ./client/nginx.conf:/etc/nginx/sites-available/default.conf
-    env_file: .env
     networks:
       - cicd
 

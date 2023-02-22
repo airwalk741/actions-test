@@ -22,8 +22,8 @@ jobs:
           port: 22
           script: |
             cd ~
-            mkdir test
-            mkdir test/client
+            mkdir -p test
+            mkdir -p test/client
 
   build:
     runs-on: ubuntu-latest
