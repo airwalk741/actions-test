@@ -1,23 +1,28 @@
-name: Docker
+name: DEPLOY TESTX TO AWS
+
 on:
   push:
     branches: [master]
 
+  workflow_dispatch:
+
 jobs:
-  mkdir:
+  build:
+    name: Build
     runs-on: ubuntu-latest
     environment: Oracle
-    steps:
-      # - name: Checkout
-      #   uses: actions/checkout@v2
 
-      - name: ssh connect & production
+    steps:
+      - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
+          script_stop: true
           script: |
+            whoami
+            ls -al
             cd ~
-            cd mkdir test
+            mkdir test
