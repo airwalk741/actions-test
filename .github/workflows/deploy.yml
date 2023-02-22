@@ -1,34 +1,34 @@
-name: deploy
-on:
-  push:
-    branches: [master]
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    environment: Oracle
-    env:
-      CI: false
-    strategy:
-      matrix:
-        node-version: [14.x]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - name: Install modules
-        run: npm install
-      - name: Build project
-        run: npm run build
-      - name: Deploy build outputs
-        uses: appleboy/scp-action@master
-        env:
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          KEY: ${{ secrets.SSH_KEY }}
-        with:
-          source: "dist/*"
-          target: "/var/www/test"
-          strip_components: 1
+# name: deploy
+# on:
+#   push:
+#     branches: [master]
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     environment: Oracle
+#     env:
+#       CI: false
+#     strategy:
+#       matrix:
+#         node-version: [14.x]
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#           cache: "npm"
+#       - name: Install modules
+#         run: npm install
+#       - name: Build project
+#         run: npm run build
+#       - name: Deploy build outputs
+#         uses: appleboy/scp-action@master
+#         env:
+#           HOST: ${{ secrets.HOST }}
+#           USERNAME: ${{ secrets.USERNAME }}
+#           KEY: ${{ secrets.SSH_KEY }}
+#         with:
+#           source: "dist/*"
+#           target: "/var/www/test"
+#           strip_components: 1
