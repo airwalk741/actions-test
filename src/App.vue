@@ -1,6 +1,7 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <h1>자동화 되는지 안되는지 확인하는 용도</h1>
+  <h1>Dcoker 자동화 확인</h1>
+
   <HelloWorld msg="Welcome to Your Vue.js App" />
 </template>
 
