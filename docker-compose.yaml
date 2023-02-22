@@ -5,7 +5,7 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    image: cicd/app:1.0.1
+    image: cicd/app:1.0.2
     ports:
       - "18081:18081"
     volumes:
