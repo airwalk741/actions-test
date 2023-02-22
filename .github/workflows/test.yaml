@@ -21,5 +21,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            whoami
-            ls -al
+            cd ~
+            mkdir test
