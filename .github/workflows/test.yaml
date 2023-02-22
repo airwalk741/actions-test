@@ -13,13 +13,13 @@ jobs:
     environment: Oracle
 
     steps:
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@master
+      - name: multiple command
+        uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          script_stop: true
           script: |
-            mkdir ~/test
+            whoami
+            ls -al
