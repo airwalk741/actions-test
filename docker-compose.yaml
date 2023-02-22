@@ -1,0 +1,18 @@
+version: "3"
+services:
+  cicdclient:
+    restart: always
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: cicd/app:1.0.1
+    ports:
+      - "18081:18081"
+    volumes:
+      - ./client/nginx.conf:/etc/nginx/sites-available/default.conf
+    env_file: .env
+    networks:
+      - cicd
+
+networks:
+  cicd:

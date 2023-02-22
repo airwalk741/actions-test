@@ -1,0 +1,22 @@
+name: Docker
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: Oracle
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: ssh connect & production
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~
+            cd mkdir test
