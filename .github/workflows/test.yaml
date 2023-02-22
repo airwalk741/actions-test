@@ -26,6 +26,7 @@ jobs:
             mkdir -p test/client
 
   build:
+    needs: mkdir
     runs-on: ubuntu-latest
     environment: Oracle
     env:
@@ -78,6 +79,7 @@ jobs:
           strip_components: 1
 
   docker:
+    needs: build
     name: docker start
     runs-on: ubuntu-latest
     environment: Oracle
