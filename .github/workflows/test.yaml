@@ -52,7 +52,7 @@ jobs:
           KEY: ${{ secrets.SSH_KEY }}
         with:
           source: "dist/*"
-          target: "~/test/build"
+          target: "~/test/client/build"
           strip_components: 1
 
       - name: docker file scp
